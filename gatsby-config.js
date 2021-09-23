@@ -21,6 +21,18 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-drupal`,
+      options: {
+        baseUrl: `http://dev-spooner.pantheonsite.io/`,
+        languageConfig: {
+          defaultLanguage: `en`,
+          enabledLanguages: [`en`, `es`],
+          translatableEntities: [`node--article`],
+          nonTranslatableEntities: [`file--file`],
+        },
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
