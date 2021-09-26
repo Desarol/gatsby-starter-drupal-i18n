@@ -1,20 +1,25 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const BlogPostTemplate = ({ data, location }) => {
-  const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const { previous, next } = data
+  const post = data.nodeArticle
+  const siteTitle = post?.langcode === 'en' ? "Drupal INTL Starter Blog" : "Blog de inicio de Drupal INTL"
+
+  const translationPaths = {
+    en: data?.englishPage?.path?.alias,
+    es: data?.spanishPage?.path?.alias,
+  }
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle} langcode={post.langcode} translationPaths={translationPaths} >
       <Seo
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={post.title}
+        lang={post.langcode}
+        description={post.body.summary}
       />
       <article
         className="blog-post"
@@ -22,11 +27,11 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <h1 itemProp="headline">{post.title}</h1>
+          <p>{post.field_date}</p>
         </header>
         <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
+          dangerouslySetInnerHTML={{ __html: post.body.value }}
           itemProp="articleBody"
         />
         <hr />
@@ -34,73 +39,40 @@ const BlogPostTemplate = ({ data, location }) => {
           <Bio />
         </footer>
       </article>
-      <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
     </Layout>
   )
 }
 
 export default BlogPostTemplate
 
+
 export const pageQuery = graphql`
-  query BlogPostBySlug(
-    $id: String!
-    $previousPostId: String
-    $nextPostId: String
+  query BlogPostById(
+    $id: Int!
+    $langcode: String!
   ) {
-    site {
-      siteMetadata {
-        title
+    nodeArticle(drupal_internal__nid: { eq: $id }, langcode: { eq: $langcode }) {
+      langcode
+      title
+      field_date(formatString: "MMM DD, YYYY")
+      body {
+        summary
+        value
+      }
+      path {
+        alias
       }
     }
-    markdownRemark(id: { eq: $id }) {
-      id
-      excerpt(pruneLength: 160)
-      html
-      frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
-        description
+
+    englishPage: nodeArticle(drupal_internal__nid: { eq: $id }, langcode: {eq: "en" }) {
+      path {
+        alias
       }
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-      }
-    }
-    next: markdownRemark(id: { eq: $nextPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
+
+    spanishPage: nodeArticle(drupal_internal__nid: { eq: $id }, langcode: {eq: "es" }) {
+      path {
+        alias
       }
     }
   }

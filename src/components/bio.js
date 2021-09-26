@@ -5,9 +5,10 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
+import React, { useContext } from 'react'
 import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
+import { LanguageContext } from '../context';
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -29,6 +30,7 @@ const Bio = () => {
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
   const social = data.site.siteMetadata?.social
+  const { t } = useContext(LanguageContext)
 
   return (
     <div className="bio">
@@ -36,7 +38,7 @@ const Bio = () => {
         className="bio-avatar"
         layout="fixed"
         formats={["auto", "webp", "avif"]}
-        src="../images/profile-pic.png"
+        src="../images/profile-image.webp"
         width={50}
         height={50}
         quality={95}
@@ -44,10 +46,10 @@ const Bio = () => {
       />
       {author?.name && (
         <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
+          {t('written')} <strong>{author.name}</strong> {t('lives')}
           {` `}
           <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
+            {t('twitter')}
           </a>
         </p>
       )}
