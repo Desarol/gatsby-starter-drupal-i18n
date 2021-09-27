@@ -3,49 +3,44 @@
   <a href="https://www.gatsbyjs.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
   </a>
+  <span>+<span>
+   <a href="https://www.drupal.org/">
+    <img alt="Drupal" src="https://cms.desarol.com//sites/default/files/2021-07/EL_blue_RGB.png" width="50" />
+  </a>
 </p>
 <h1 align="center">
-  Gatsby's blog starter
+  Gatsby Drupal I18n Starter
 </h1>
 
-Kick off your project with this blog boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
-
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
-
+Start your drupal i18n project with this boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
-
-    Use the Gatsby CLI ([install instructions](https://www.gatsbyjs.com/docs/tutorial/part-0/#gatsby-cli)) to create a new site, specifying the blog starter.
-
+1.  **Install project dependencies.**
+    
     ```shell
-    # create a new Gatsby site using the blog starter
-    gatsby new my-blog-starter https://github.com/gatsbyjs/gatsby-starter-blog
+    npm install
     ```
 
-1.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
+2.  **Start developing.**
 
     ```shell
-    cd my-blog-starter/
-    gatsby develop
+    npm start
     ```
 
-1.  **Open the source code and start editing!**
+3.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8000`!
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
 
-    Open the `my-blog-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
 
-## 🚀 Quick start (Gatsby Cloud)
+##  🌏 Create your Drupal site
 
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
+There is a defult drupal site made with pantheon but you can create your own drupal site with [pantheon](https://pantheon.io/register) then you can change the deafult drupal site inside `gatsby-config.js` changin the `baseUrl` of the drupal plugin
 
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsby-inc/gatsby-starter-blog-beta)
+##  🌏 Add multilingual content to Drupal
 
+Folow this video to know how to add multilingual content to your drupal website: https://www.loom.com/share/20b401f3c0b2492f895a384c356c92ea
 ## 🧐 What's inside?
 
 A quick look at the top-level files and directories you'll see in a Gatsby project.
@@ -95,11 +90,5 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 - **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
 
 - **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
-
-## 💫 Deploy
-
-[Build, Deploy, and Host On The Only Cloud Built For Gatsby](https://www.gatsbyjs.com/products/cloud/)
-
-Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
 
 <!-- AUTO-GENERATED-CONTENT:END -->
