@@ -6,7 +6,7 @@ module.exports = {
       summary: `who lives and works in Costa Rica building useful things.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://dev-gatsby-drupal-i18n.pantheonsite.io/`,
     social: {
       twitter: `kylemathews`,
     },
@@ -16,7 +16,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `http://dev-spooner.pantheonsite.io/`,
+        baseUrl: `https://dev-gatsby-drupal-i18n.pantheonsite.io/`,
         languageConfig: {
           defaultLanguage: `en`,
           enabledLanguages: [`en`, `es`],
