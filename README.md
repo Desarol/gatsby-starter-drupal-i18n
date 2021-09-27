@@ -34,7 +34,7 @@ Start your drupal i18n project with this boilerplate. This starter ships with th
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
 
 
-##  🌏 Create your Drupal site
+##  💻 Create your Drupal site
 
 There is a defult drupal site made with pantheon but you can create your own drupal site with [pantheon](https://pantheon.io/register) then you can change the deafult drupal site inside `gatsby-config.js` changin the `baseUrl` of the drupal plugin
 
