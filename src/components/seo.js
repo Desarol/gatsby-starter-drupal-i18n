@@ -5,10 +5,11 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
+ import React, { useContext } from 'react'
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import { LanguageContext } from '../context';
 
 const Seo = ({ description, lang, meta, title }) => {
   const { site } = useStaticQuery(
@@ -29,6 +30,8 @@ const Seo = ({ description, lang, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+  const { translationPaths } = useContext(LanguageContext)
+  const paths = { ...translationPaths }
 
   return (
     <Helmet
@@ -71,7 +74,10 @@ const Seo = ({ description, lang, meta, title }) => {
           content: metaDescription,
         },
       ].concat(meta)}
-    />
+    >
+      {Object.keys(paths).map((key) => (paths[key] !== undefined && <link key={key} rel="alternate" hrefLang={key} href={`https://example${paths[key]}`} />))}
+      {translationPaths?.en && <link rel="alternate" hrefLang="x-default" href={`https://example${translationPaths.en}`} />}
+    </Helmet>
   )
 }
 
