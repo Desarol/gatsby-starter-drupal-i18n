@@ -20,7 +20,14 @@ Start your Gatsby/Drupal i18n project with this boilerplate. This starter ships 
 
 ## 🚀 Quick start
 
-1.  **Install project dependencies.**
+1.  ** 💻 Create your Drupal site on Pantheoon (or another hosting provider of your choice)
+
+Create your own drupal site with [pantheon](https://pantheon.io/register) 
+
+Then follow the basic instructions in this video to add 🌏 multilingual content to your Drupal website: https://www.loom.com/share/20b401f3c0b2492f895a384c356c92ea
+
+
+2.  **Install project dependencies.**
     
     ```shell
     npm install
@@ -48,26 +55,19 @@ module.exports = {
 }
 ```
 
-3.  **Start developing.**
+4.  **Start developing.**
 
     ```shell
     npm start
     ```
 
-4.  **Open the source code and start editing!**
+5.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8000`!
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.com/tutorial/part-five/#introducing-graphiql)._
 
 
-##  💻 Create your Drupal site
-
-There is a defult drupal site made with pantheon but you can create your own drupal site with [pantheon](https://pantheon.io/register) then you can change the deafult drupal site inside `gatsby-config.js` changin the `baseUrl` of the drupal plugin
-
-##  🌏 Add multilingual content to Drupal
-
-Folow this video to know how to add multilingual content to your drupal website: https://www.loom.com/share/20b401f3c0b2492f895a384c356c92ea
 ## 🧐 What's inside?
 
 A quick look at the top-level files and directories you'll see in a Gatsby project.
