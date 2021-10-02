@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby`,
+    title: `Gatsby Drupal i18n`,
     author: {
       name: `Robert Caracaus`,
       summary: `who lives and works in Costa Rica building useful things.`,
@@ -8,7 +8,7 @@ module.exports = {
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://dev-gatsby-drupal-i18n.pantheonsite.io/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `robertcaracaus`,
     },
   },
   plugins: [
@@ -16,7 +16,7 @@ module.exports = {
     {
       resolve: `gatsby-source-drupal`,
       options: {
-        baseUrl: `https://dev-gatsby-drupal-i18n.pantheonsite.io/`,
+        baseUrl: `https://dev-gatsby-drupal-i18n.pantheonsite.io/`, // Path to your Drupal site.
         languageConfig: {
           defaultLanguage: `en`,
           enabledLanguages: [`en`, `es`],
