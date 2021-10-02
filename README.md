@@ -18,50 +18,52 @@ Start your Gatsby/Drupal i18n project with this boilerplate. This starter ships 
 - A simple language toggle connected with sample multilingual GraphQL queries
 - A translatable Blog Listing component
 
+
+
+## Create your Drupal site on Pantheoon
+
+- Create your own drupal site with [Pantheon](https://pantheon.io/register) (or Drupal hosting provider of your choice)
+
+- Then follow the basic instructions in this video to add 🌏 multilingual content to your Drupal website: https://www.loom.com/share/20b401f3c0b2492f895a384c356c92ea
+
+
 ## 🚀 Quick start
 
-1.  ** 💻 Create your Drupal site on Pantheoon (or another hosting provider of your choice)
-
-Create your own drupal site with [pantheon](https://pantheon.io/register) 
-
-Then follow the basic instructions in this video to add 🌏 multilingual content to your Drupal website: https://www.loom.com/share/20b401f3c0b2492f895a384c356c92ea
-
-
-2.  **Install project dependencies.**
+1.  **Install project dependencies.**
     
     ```shell
     npm install
     ```
     
-3.  **Update gatsby-confg.js with the path to your Drupal installation, enabled languages, and translatable entities**
+2.  **Update gatsby-confg.js with the path to your Drupal installation, enabled languages, and translatable entities**
     
-```javascript
-// In your gatsby-config.js
-module.exports = {
-  plugins: [
-    {
-      resolve: `gatsby-source-drupal`,
-      options: {
-        baseUrl: `https://live-contentacms.pantheonsite.io/`, // Path to your Drupal site
-        languageConfig: {
-          defaultLanguage: `en`,
-          enabledLanguages: [`en`, `es`],
-          translatableEntities: [`node--article`, 'node--page'],
-          nonTranslatableEntities: [`file--file`],
+    ```javascript
+    // In your gatsby-config.js
+    module.exports = {
+      plugins: [
+        {
+          resolve: `gatsby-source-drupal`,
+          options: {
+            baseUrl: `https://live-contentacms.pantheonsite.io/`, // Path to your Drupal site
+            languageConfig: {
+              defaultLanguage: `en`,
+              enabledLanguages: [`en`, `es`],
+              translatableEntities: [`node--article`, 'node--page'],
+              nonTranslatableEntities: [`file--file`],
+            },
+          },
         },
-      },
-    },
-  ],
-}
-```
+      ],
+    }
+    ```
 
-4.  **Start developing.**
+3.  **Start developing.**
 
     ```shell
     npm start
     ```
 
-5.  **Open the source code and start editing!**
+4.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8000`!
 
