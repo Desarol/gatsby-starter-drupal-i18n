@@ -15,7 +15,7 @@
 Start your Gatsby/Drupal i18n project with this boilerplate. This starter ships with:
 
 - A pre-configured gatsby-source-drupal plugin which assumes translatable Article content type
-- A simple language toggle connected with sample mult GraphQL queries
+- A simple language toggle connected with sample multilingual GraphQL queries
 - A translatable Blog Listing component
 
 ## 🚀 Quick start
