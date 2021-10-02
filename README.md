@@ -12,7 +12,12 @@
   Gatsby Drupal I18n Starter
 </h1>
 
-Start your drupal i18n project with this boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+Start your Gatsby/Drupal i18n project with this boilerplate. This starter ships with:
+
+- A pre-configured gatsby-source-drupal plugin which assumes translatable Article content type
+- A simple language toggle connected with sample mult GraphQL queries
+- A translatable Blog Listing component
+
 ## 🚀 Quick start
 
 1.  **Install project dependencies.**
@@ -20,14 +25,36 @@ Start your drupal i18n project with this boilerplate. This starter ships with th
     ```shell
     npm install
     ```
+    
+3.  **Update gatsby-confg.js with the path to your Drupal installation, enabled languages, and translatable entities**
+    
+```javascript
+// In your gatsby-config.js
+module.exports = {
+  plugins: [
+    {
+      resolve: `gatsby-source-drupal`,
+      options: {
+        baseUrl: `https://live-contentacms.pantheonsite.io/`, // Path to your Drupal site
+        languageConfig: {
+          defaultLanguage: `en`,
+          enabledLanguages: [`en`, `es`],
+          translatableEntities: [`node--article`, 'node--page'],
+          nonTranslatableEntities: [`file--file`],
+        },
+      },
+    },
+  ],
+}
+```
 
-2.  **Start developing.**
+3.  **Start developing.**
 
     ```shell
     npm start
     ```
 
-3.  **Open the source code and start editing!**
+4.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8000`!
 
