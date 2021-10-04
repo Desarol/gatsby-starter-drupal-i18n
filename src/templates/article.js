@@ -1,13 +1,13 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { translate } from "../translate"
 
-const BlogPostTemplate = ({ data, location }) => {
-  const post = data.nodeArticle
-  const siteTitle = post?.langcode === 'en' ? "Drupal INTL Starter Blog" : "Blog de inicio de Drupal INTL"
+const ArticleTemplate = ({ data, location }) => {
+  const article = data.nodeArticle
+  const siteTitle = translate(article?.langcode, 'Gatsby + Drupal Internationalization Starter')
 
   const translationPaths = {
     en: data?.englishPage?.path?.alias,
@@ -15,11 +15,11 @@ const BlogPostTemplate = ({ data, location }) => {
   }
 
   return (
-    <Layout location={location} title={siteTitle} langcode={post.langcode} translationPaths={translationPaths} >
+    <Layout location={location} title={siteTitle} langcode={article.langcode} translationPaths={translationPaths} >
       <Seo
-        title={post.title}
-        lang={post.langcode}
-        description={post.body.summary}
+        title={article.title}
+        lang={article.langcode}
+        description={article.body.summary}
       />
       <article
         className="blog-post"
@@ -27,31 +27,28 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
-          <h1 itemProp="headline">{post.title}</h1>
-          <p>{post.field_date}</p>
+          <h1 itemProp="headline">{article.title}</h1>
+          <p>{article.field_date}</p>
         </header>
         <section
-          dangerouslySetInnerHTML={{ __html: post.body.value }}
+          dangerouslySetInnerHTML={{ __html: article.body.value }}
           itemProp="articleBody"
         />
         <hr />
-        <footer>
-          <Bio />
-        </footer>
       </article>
     </Layout>
   )
 }
 
-export default BlogPostTemplate
+export default ArticleTemplate
 
 
 export const pageQuery = graphql`
   query ArticleById(
-    $id: Int!
+    $nid: Int!
     $langcode: String!
   ) {
-    nodeArticle(drupal_internal__nid: { eq: $id }, langcode: { eq: $langcode }) {
+    nodeArticle(drupal_internal__nid: { eq: $nid }, langcode: { eq: $langcode }) {
       langcode
       title
       field_date(formatString: "MMM DD, YYYY")
@@ -64,13 +61,13 @@ export const pageQuery = graphql`
       }
     }
 
-    englishPage: nodeArticle(drupal_internal__nid: { eq: $id }, langcode: {eq: "en" }) {
+    englishPage: nodeArticle(drupal_internal__nid: { eq: $nid }, langcode: {eq: "en" }) {
       path {
         alias
       }
     }
 
-    spanishPage: nodeArticle(drupal_internal__nid: { eq: $id }, langcode: {eq: "es" }) {
+    spanishPage: nodeArticle(drupal_internal__nid: { eq: $nid }, langcode: {eq: "es" }) {
       path {
         alias
       }

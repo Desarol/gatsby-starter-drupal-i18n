@@ -2,22 +2,12 @@ const path = require(`path`)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-  const pageTemplate = path.resolve(`./src/templates/page.js`)
+  const homeTemplate = path.resolve(`./src/templates/home.js`)
   const articleTemplate = path.resolve(`./src/templates/article.js`)
 
   const result = await graphql(
     `
       {
-        allNodePage {
-          nodes {
-            nid: drupal_internal__nid
-            langcode
-            path {
-              alias
-            }
-          }
-        }
-
         allNodeArticle {
           nodes {
             nid: drupal_internal__nid
@@ -39,24 +29,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  result?.data?.allNodePage?.nodes?.forEach((page) => {
+  const homePageTranslations = ['en', 'es']
+  homePageTranslations.forEach((langcode) => {
     createPage({
-      path: page.path.alias ?? '/',
-      component: pageTemplate,
+      path: `/${langcode === 'en' ? '' : 'es'}`,
+      component: homeTemplate,
       context: {
-        id: page.nid,
-        langcode: page.langcode,
-      },
+        langcode,
+      }
     })
   })
 
-
   result?.data?.allNodeArticle?.nodes?.forEach((article) => {
+    if (!article?.path?.alias) {
+      console.warn(`No path for node ${page.nid}. Not creating a page.`)
+      return
+    }
+
     createPage({
       path: article.path.alias,
       component: articleTemplate,
       context: {
-        id: article.nid,
+        nid: article.nid,
         langcode: article.langcode,
       },
     })
