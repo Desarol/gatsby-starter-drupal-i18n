@@ -1,4 +1,5 @@
 const path = require(`path`)
+const { homePagePaths } = require("./src/translate")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
@@ -29,10 +30,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const homePageTranslations = ['en', 'es']
-  homePageTranslations.forEach((langcode) => {
+  Object.entries(homePagePaths).forEach(([langcode, path]) => {
     createPage({
-      path: `/${langcode === 'en' ? '' : 'es'}`,
+      path,
       component: homeTemplate,
       context: {
         langcode,
