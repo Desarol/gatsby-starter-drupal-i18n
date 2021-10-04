@@ -3,11 +3,9 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { translate } from "../translate"
 
 const ArticleTemplate = ({ data, location }) => {
   const article = data.nodeArticle
-  const siteTitle = translate(article?.langcode, 'Gatsby + Drupal Internationalization Starter')
 
   const translationPaths = {
     en: data?.englishPage?.path?.alias,
@@ -15,7 +13,7 @@ const ArticleTemplate = ({ data, location }) => {
   }
 
   return (
-    <Layout location={location} title={siteTitle} langcode={article.langcode} translationPaths={translationPaths} >
+    <Layout location={location} langcode={article.langcode} translationPaths={translationPaths} >
       <Seo
         title={article.title}
         lang={article.langcode}
