@@ -9,7 +9,7 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsby Drupal I18n Starter
+  Gatsby Starter Drupal i18n 
 </h1>
 
 Start your Gatsby/Drupal i18n project with this boilerplate. This starter ships with:
