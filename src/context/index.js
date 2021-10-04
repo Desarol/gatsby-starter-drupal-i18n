@@ -1,11 +1,5 @@
 import React, { createContext } from 'react'
-import english from './translations/en.json'
-import spanish from './translations/es.json'
-
-const translations = {
-  en: english,
-  es: spanish,
-}
+import { translate } from '../translate'
 
 const languageContextDefaultValue = {
   langcode: 'en',
@@ -22,17 +16,12 @@ const LanguageContextProvider = ({
   langcode,
   translationPaths,
 }) => {
-  const translate = (defaultLanguageText) => {
-    const translationText = translations[langcode]?.[defaultLanguageText]
-    return translationText ?? defaultLanguageText
-  }
-
   return (
     <LanguageContext.Provider
       value={{
         langcode,
         translationPaths,
-        t: translate
+        t: (text) => translate(langcode, text)
       }}
     >
       {children}

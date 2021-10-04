@@ -1,46 +1,40 @@
 import React from 'react'
 import { Link, graphql } from "gatsby"
 
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { homePagePaths, translate } from '../translate'
 
-const BlogIndex = ({ data, location }) => {
-  const nodePage = data.nodePage
+const PageTemplate = ({ data, location, pageContext }) => {
   const allNodeArticles = data.allNodeArticle.nodes
 
-  const posts = allNodeArticles?.filter((post) => (
-    post.langcode === nodePage.langcode
-  ))
-
-  const translationPaths = {
-    en: data?.englishPage?.path?.alias ?? '/',
-    es: data.spanishPage?.path?.alias,
-  }
-
   return (
-    <Layout location={location} title={nodePage?.title} langcode={nodePage.langcode} translationPaths={translationPaths} >
-      <Seo title={nodePage?.title} lang={nodePage.langcode} />
-      <Bio />
+    <Layout
+      location={location}
+      title={translate(pageContext?.langcode, 'Home')}
+      langcode={pageContext?.langcode}
+      translationPaths={homePagePaths}
+    >
+      <Seo title={translate(pageContext?.langcode, 'Home')} />
       <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
+        {allNodeArticles.map(article => {
           return (
-            <li key={post.path.alias}>
+            <li key={article.path.alias}>
               <article
-                className="post-list-item"
+                className="article-list-item"
                 itemScope
                 itemType="http://schema.org/Article"
               >
                 <header>
                   <h2>
-                    <Link to={post?.path?.alias} itemProp="url">
-                      <span itemProp="headline">{post?.title}</span>
+                    <Link to={article?.path?.alias} itemProp="url">
+                      <span itemProp="headline">{article?.title}</span>
                     </Link>
                   </h2>
-                  <small>{post?.field_date}</small>
+                  <small>{article?.field_date}</small>
                 </header>
                 <section>
-                  <p>{post?.body?.summary}</p>
+                  <p>{article?.body?.summary}</p>
                 </section>
               </article>
             </li>
@@ -51,31 +45,11 @@ const BlogIndex = ({ data, location }) => {
   )
 }
 
-export default BlogIndex
+export default PageTemplate
 
 export const pageQuery = graphql`
-  query PageById(
-    $id: Int!
-    $langcode: String!
-  ) {
-    nodePage(drupal_internal__nid: { eq: $id }, langcode: { eq: $langcode }) {
-      langcode
-      title
-    }
-
-    englishPage: nodePage(drupal_internal__nid: { eq: $id }, langcode: {eq: "en" }) {
-      path {
-        alias
-      }
-    }
-
-    spanishPage: nodePage(drupal_internal__nid: { eq: $id }, langcode: {eq: "es" }) {
-      path {
-        alias
-      }
-    }
-
-    allNodeArticle {
+  query PageById($langcode: String!) {
+    allNodeArticle(filter: { langcode: { eq: $langcode } }) {
       nodes {
         langcode
         title

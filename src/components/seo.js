@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { LanguageContext } from '../context';
 
-const Seo = ({ description, lang, meta, title }) => {
+const Seo = ({ description, meta, title }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -30,13 +30,13 @@ const Seo = ({ description, lang, meta, title }) => {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
-  const { translationPaths } = useContext(LanguageContext)
+  const { translationPaths, langcode } = useContext(LanguageContext)
   const paths = { ...translationPaths }
 
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang: langcode,
       }}
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
@@ -82,14 +82,12 @@ const Seo = ({ description, lang, meta, title }) => {
 }
 
 Seo.defaultProps = {
-  lang: `en`,
   meta: [],
   description: ``,
 }
 
 Seo.propTypes = {
   description: PropTypes.string,
-  lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
 }
