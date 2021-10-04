@@ -4,11 +4,11 @@ import Header from "./header"
 import Footer from './footer';
 import LanguageContextProvider from '../context'
 
-const Layout = ({ title, children, langcode,  translationPaths }) => {
+const Layout = ({ children, langcode,  translationPaths }) => {
   return (
     <LanguageContextProvider langcode={langcode} translationPaths={translationPaths}>
       <div className="global-wrapper">
-        <Header title={title} />
+        <Header />
         <main>{children}</main>
         <Footer />
       </div>
