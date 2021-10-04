@@ -47,7 +47,7 @@ export default BlogPostTemplate
 
 
 export const pageQuery = graphql`
-  query BlogPostById(
+  query ArticleById(
     $id: Int!
     $langcode: String!
   ) {

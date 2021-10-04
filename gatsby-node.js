@@ -2,8 +2,8 @@ const path = require(`path`)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-  const home = path.resolve(`./src/templates/home.js`)
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  const pageTemplate = path.resolve(`./src/templates/page.js`)
+  const articleTemplate = path.resolve(`./src/templates/article.js`)
 
   const result = await graphql(
     `
@@ -42,9 +42,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   result?.data?.allNodePage?.nodes?.forEach((page) => {
     createPage({
       path: page.path.alias ?? '/',
-      component: home,
+      component: pageTemplate,
       context: {
-        id:  page.nid,
+        id: page.nid,
         langcode: page.langcode,
       },
     })
@@ -54,9 +54,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   result?.data?.allNodeArticle?.nodes?.forEach((article) => {
     createPage({
       path: article.path.alias,
-      component: blogPost,
+      component: articleTemplate,
       context: {
-        id:  article.nid,
+        id: article.nid,
         langcode: article.langcode,
       },
     })
