@@ -14,12 +14,14 @@
 
 Start your Gatsby/Drupal i18n project with this boilerplate. This starter ships with:
 
-- A pre-configured gatsby-source-drupal plugin which assumes translatable Article content type
-- A simple language toggle connected with sample multilingual GraphQL queries
-- A translatable Blog Listing component
+- Pulls translated articles from a default Drupal instance
+- Multilingual GraphQL patterns
+- Custom React context for language state
+- Provides a simple way to translate interface strings
+- Provides a language toggle UI component
+- Integrates with lang and hreflang
 
-
-
+    
 ## Create your Drupal site on Pantheoon
 
 - Create your own drupal site with [Pantheon](https://pantheon.io/register) (or Drupal hosting provider of your choice)
